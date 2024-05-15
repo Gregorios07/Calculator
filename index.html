@@ -6,16 +6,11 @@
     <title>Document</title>
     <style>
         .app-container{
-            width: 200px;
+            width: 350px;
         }
         .calculator{
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-        }
-        .display{
-            grid-column-start: 1;
-            grid-column-end: 5;
-            text-align: end;
         }
         .display{
             grid-column-start: 1;
@@ -26,33 +21,31 @@
             padding-right: 10px;
             padding-top: 5px;
         }
-        .number{
-            font-size: 30px;
-        }
-        .button{
+        button{
             height: 50px;
             background-color: white;
             border: 1px solid black;
         }
         button.operator{
-            background-color: gray;
-            font-size: 30px;
+            background-color: darkgrey;
+        }
+        #app{
+            padding-left: 30px;
+            padding-top: 40px;
         }
     </style>
 </head>
 <body>
-
+    
 <div id="app"></div>
-
 <script src="https://unpkg.com/react@18/umd/react.development.js"  crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"  crossorigin></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
 <script type="text/babel">
     // INTRO
     //const hello = React.createElement('h1', {}, 'Hello React!');
     //const hello = <h1>Hello React! 123</h1>;
-
+    
     // const hello = (
     //     <div>
     //         <h1>Hello React! 123</h1>
@@ -60,13 +53,11 @@
     //     </div>
     // )
     // ReactDOM.render(hello, document.getElementById('app'));
-
 // #########################################################
 //<!-- Functional Components -->
 // function sample(){
 //     return <h1>HELLO!</h1>
 // }
-
 // const sample = () => <h1>HELLO arrow function!</h1>
 // const sample = () => (
 //     <div>
@@ -74,7 +65,6 @@
 //         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut, delectus!</p>
 //     </div>
 // )
-
 // ReactDOM.render(sample(), document.getElementById('app'));
 // ###############################################################
 // COMPONENTS / Props
@@ -94,13 +84,10 @@
 //     </div>
 // )
 // ReactDOM.render(<Hello fname="Bryan" age={15}/>, document.getElementById('app'))
-
 // ########################################################################################################
 // REACT callbak function
-
 // Parent component
 function Calculator(){
-
 // useState
     // const [display, setDisplay] = React.useState('0');
     //useState returns an array with 2 elements, the first element is the current state value, the second element is a function that allows you to update the state value
@@ -123,14 +110,14 @@ function Calculator(){
         });
     }
 
- // handle clear button
- function handleClear(){
+    // handle clear button
+    function handleClear(){
         setCalc({current: '0', isInitial: true});
         setCalc({current: '0', total: '0', isInitial: true, preOp: ''});
     }
 
-// function for handling the operator
-function handleOperator(value){
+    // function for handling the operator
+    function handleOperator(value){
         const total = doCalculation();
         setCalc({
         current: total.toString(), 
@@ -159,34 +146,28 @@ function handleOperator(value){
         }
         return total;
     }
-
     return(
         <div className="calculator">
             <div className="display">{calc.current}</div>
-
-            <CalcButton className="number" onClick={handleNumber} value='7'/>
-            <CalcButton className="number" onClick={handleNumber} value='8'/>
-            <CalcButton className="number" onClick={handleNumber} value='9'/>
-            <CalcButton className="operator" value="+"/>
-
-            <CalcButton className="number" onClick={handleNumber} value='4'/>
-            <CalcButton className="number" onClick={handleNumber} value='5'/>
-            <CalcButton className="number" onClick={handleNumber} value='6'/>
-            <CalcButton className="operator" value="-"/>
-
-            <CalcButton className="number" onClick={handleNumber} value='1'/>
-            <CalcButton className="number" onClick={handleNumber} value='2'/>
-            <CalcButton className="number" onClick={handleNumber} value='3'/>
-            <CalcButton className="operator" value="/"/>
-
-            <CalcButton className="number" value="C" onClick={handleClear}/>
-            <CalcButton className="number" onClick={handleNumber} value='0'/>
-            <CalcButton className="operator" value="="/>
-            <CalcButton className="operator" value="*"/>
+            <CalcButton onClick={handleNumber} value='7'/>
+            <CalcButton onClick={handleNumber} value='8'/>
+            <CalcButton onClick={handleNumber} value='9'/>
+            <CalcButton className="operator" value="+" onClick={handleOperator}/>
+            <CalcButton onClick={handleNumber} value='4'/>
+            <CalcButton onClick={handleNumber} value='5'/>
+            <CalcButton onClick={handleNumber} value='6'/>
+            <CalcButton className="operator" value="-" onClick={handleOperator}/>
+            <CalcButton onClick={handleNumber} value='1'/>
+            <CalcButton onClick={handleNumber} value='2'/>
+            <CalcButton onClick={handleNumber} value='3'/>
+            <CalcButton className="operator" value="/" onClick={handleOperator}/>
+            <CalcButton value="C" onClick={handleClear}/>
+            <CalcButton onClick={handleNumber} value='0'/>
+            <CalcButton className="operator" value="=" onClick={handleOperator}/>
+            <CalcButton className="operator" value="*" onClick={handleOperator}/>
         </div>
     );
 }
-
 // child component
 function CalcButton(props){
     return(
@@ -194,7 +175,6 @@ function CalcButton(props){
     )
 }
 ReactDOM.render(<div className="app-container"><Calculator/></div>, document.getElementById('app'))
-
 </script>
 </body>
 </html>
