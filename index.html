@@ -113,12 +113,33 @@ function Calculator(){
         setCalc({current: '0', isInitial: true});
     }
 
-//useState
-    // const {display, setDisplay} = React.useState ('0');
+// useState
+    // const [display, setDisplay] = React.useState('0');
+    //useState returns an array with 2 elements, the first element is the current state value, the second element is a function that allows you to update the state value
     const [calc, setCalc] = React.useState({
         current: '0',
-        isInitial: true
+        total: '0',
+        isInitial: true,
+        preOp: ''
     });
+    function handleNumber(value){
+        let newValue = value;
+        if(!calc.isInitial){   //if the current value is not initial where the initial value is 0
+            newValue = calc.current + value;
+        }
+        setCalc({
+            current: newValue, 
+            total: calc.total, 
+            isInitial: false, 
+            preOp: calc.preOp
+        });
+    }
+
+ // handle clear button
+ function handleClear(){
+        setCalc({current: '0', isInitial: true});
+        setCalc({current: '0', total: '0', isInitial: true, preOp: ''});
+    }
 
 // function for handling the operator
 function handleOperator(value){
