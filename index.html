@@ -100,18 +100,6 @@
 
 // Parent component
 function Calculator(){
-    function handleNumber (value){
-        // alert(value)
-        let newNum = value; 
-        if(!calc.isInitial){
-            newNum = calc.current + value; 
-        }
-        setCalc({current: newNum, isInitial: false});
-    }
-
-    function handleClear(){
-        setCalc({current: '0', isInitial: true});
-    }
 
 // useState
     // const [display, setDisplay] = React.useState('0');
